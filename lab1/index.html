@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body style="
+display:grid;
+grid-gap: 1em;
+text-align: center;
+">
+    <h1 class="card-title">{{ .Date }}</h1>
+    <ul class="list-group list-group-horizontal" style="justify-content: center;">
+        <li class="list-group-item" id="hour">{{ .Hour }}</li>
+        <li class="list-group-item" id="min">{{ .Minutes }}</li>
+        <li class="list-group-item" id="sec">{{ .Second }}</li>
+    </ul>
+    <a href="/"><button><h1>/</h1></button></a>
+    <a href="/time"><button><h1>/time</h1></button></a>
+    
+    <script type="text/javascript">
+        
+    let timerId = setInterval(() => {
+        if (document.getElementById('sec').textContent > 58){
+            document.getElementById('sec').textContent = "0"+0
+            document.getElementById('min').textContent++
+            if(document.getElementById('min').textContent > 58){
+                document.getElementById('min').textContent = 0
+                document.getElementById('sec').textContent = 0
+                document.getElementById('hour').textContent++
+                if (document.getElementById('hour').textContent > 22){
+                    document.getElementById('hour').textContent = 0
+                }}
+        }else{
+            if(document.getElementById('sec').textContent < 9){
+                document.getElementById('sec').textContent++
+                document.getElementById('sec').textContent = "0"+ String(document.getElementById('sec').textContent)
+            }else{
+                document.getElementById('sec').textContent++
+            }}}, 1000);
+    </script>
+    
+</body>
+</html>
